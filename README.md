@@ -1,4 +1,4 @@
-# Boloons
+# Baloons
 My first program
 
 This is my first window application written with QT Ctreator. I don't work with this software before. This application presents a database of balloons and orders. It was designed to make user's life easier.
