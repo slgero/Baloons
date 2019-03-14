@@ -1,0 +1,62 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>icons/add_new.png</file>
+        <file>icons/warning.png</file>
+        <file>icons/hint.png</file>
+        <file>icons/helium.png</file>
+        <file>icons/unnamed.png</file>
+        <file>icons/misc-helium.png</file>
+        <file>icons/8.png</file>
+        <file>icons/198751.png</file>
+        <file>icons/kissclipart-phone-list-clipart-contact-list-mobile-phones-addr-a3978c73e8479d15.png</file>
+        <file>icons/be7f7eb1f18933369cf644f87bc8c74b-telephone-round-icon-by-vexels.png</file>
+        <file>icons/price-tag-usd.png</file>
+        <file>icons/30162724-ed8b-4a46-93ca-37c4d4ab8d45.png</file>
+        <file>icons/title.png</file>
+        <file>icons/not.png</file>
+        <file>icons/Allowed.svg_.png</file>
+        <file>icons/121-512.png</file>
+        <file>icons/statistics.png</file>
+        <file>icons/money.png</file>
+        <file>icons/216658.png</file>
+        <file>icons/edit-property.png</file>
+        <file>icons/13165939071654987882logout-md.png</file>
+        <file>icons/overtime.png</file>
+        <file>icons/Save-512.png</file>
+        <file>icons/baloons.png</file>
+        <file>icons/bbal.png</file>
+        <file>icons/Free-Tick-Mark-clipboard-Icon-PSD.png</file>
+        <file>icons/Circle-icons-compose.svg.png</file>
+        <file>icons/751387_edit_512x512.png</file>
+        <file>icons/Services_ECommerce_v2-01.png</file>
+        <file>icons/statistics (1).png</file>
+        <file>icons/zakaz.png</file>
+        <file>icons/5917e815bcce215c0562950d.png</file>
+        <file>icons/party.png</file>
+        <file>icons/Right-07-512.png</file>
+        <file>icons/toMain.png</file>
+        <file>icons/my_order.png</file>
+        <file>icons/Left.png</file>
+        <file>icons/Taxi-512.png</file>
+        <file>icons/baloons-512.png</file>
+        <file>icons/wait.png</file>
+        <file>icons/cancel.png</file>
+        <file>icons/otmena.png</file>
+        <file>icons/active2.png</file>
+        <file>icons/check-mark-11-512.png</file>
+        <file>icons/yeah.png</file>
+        <file>icons/angry.png</file>
+        <file>icons/save.png</file>
+        <file>icons/open.png</file>
+        <file>icons/readme.png</file>
+        <file>icons/baloons-111.ico</file>
+    </qresource>
+    <qresource prefix="/to_order">
+        <file>icons/instagram.png</file>
+        <file>icons/others.png</file>
+        <file>icons/people.png</file>
+        <file>icons/vk.png</file>
+        <file>icons/whatsapp.png</file>
+        <file>icons/Web_Development.png</file>
+    </qresource>
+</RCC>
