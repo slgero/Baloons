@@ -36,7 +36,8 @@ SOURCES += \
     myorders.cpp \
     qcustomplot.cpp \
     hint.cpp \
-    faq.cpp
+    faq.cpp \
+    greeting.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -49,7 +50,8 @@ HEADERS += \
     myorders.h \
     qcustomplot.h \
     hint.h \
-    faq.h
+    faq.h \
+    greeting.h
 
 FORMS += \
         mainwindow.ui \
@@ -60,7 +62,8 @@ FORMS += \
     newspend.ui \
     myorders.ui \
     hint.ui \
-    faq.ui
+    faq.ui \
+    greeting.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

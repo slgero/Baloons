@@ -17,6 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     db = std::make_shared<DataBase>();
     ReadSettings();
+    UpdateWindowName();
+    qDebug() << "Main W";
+}
+
+void MainWindow::UpdateWindowName(){
+    setWindowTitle(GetOrgName() + " @ " + db->GetDataBaseName());
 }
 
 MainWindow::~MainWindow()
@@ -48,17 +54,43 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::SetOrganisationName(const QString& name){
+    settings.beginGroup("/Settings");
+    qDebug() << "I add org name =" << name;
+    settings.setValue("/organisation_name2", name);
+    settings.endGroup();
+    SetOrgName(name);
+//    UpdateWindowName();
+}
+
+QString MainWindow::GetOrganisationName(){
+    settings.beginGroup("/Settings");
+    QString tmp = settings.value("/organisation_name2", "").toString();
+    qDebug() << "I get org name =" << tmp;
+    settings.endGroup();
+    return tmp;
+}
+
 void MainWindow::ReadSettings(){
     settings.beginGroup("/Settings");
     db->SetPATH(settings.value("/path2", "").toString());
+    QString tmp = GetOrganisationName();
+    if(tmp.isEmpty()){
+        Greeting greet(this);
+        greet.setModal(true);
+        greet.exec();
+    } else {
+        SetOrgName(tmp);
+    }
     if (!db->GetPATH().isEmpty()){
         if (db->ReadDataBase()){
             ui->statusBar->showMessage("База данных успешно загружена.", 2000);
         } else {
-             QMessageBox::critical(this, "Жопа", "Невозможно прочитать файл, если подобная ошибка\n"
-                                                 "повторится и в следующий раз, то скорее всего\n"
-                                                 "Вы потеряли ваши данные. Надеюсь, Вы воспользовались\n"
-                                                 "моим советом и создали резервную копию.");
+             QMessageBox::critical(this, "Жопа...", "Невозможно прочитать файл базы данных.\n"
+                                                    "Попробуйте заново открыть нужный Вам файл. Если подобная ошибка\n"
+                                                    "повторится и в следующий раз, то скорее всего\n"
+                                                    "Вы потеряли Ваши данные. Надеюсь, Вы воспользовались\n"
+                                                    "моим советом и создали резервную копию.");
         }
     } else {
         ui->statusBar->showMessage("База данных не загружена.", 2000);
@@ -119,15 +151,20 @@ void MainWindow::on_openAction_triggered()
                                              "Отркрытие невозможно!");
     } else {
         QMessageBox::StandardButton quest =
-                QMessageBox::question(this, "Вопрос", "Сохранить эту базу данныъ?",
+                QMessageBox::question(this, "Вопрос", "Сохранить эту базу данных?",
                                       QMessageBox::Yes | QMessageBox::No);
         if (quest == QMessageBox::Yes){
-            db->SaveDataBase();                     // Save Old DataBase
+            if (db->GetPATH().isEmpty()){
+                on_save_as_triggered();
+            }else {
+                db->SaveDataBase();                     // Save Old DataBase
+            }
         }
         db = std::make_shared<DataBase>();          // Create New DataBase
         db->SetPATH(fileName);                      // Set new PATH
         WriteSettings();                            // Update Path to open current document later
         db->ReadDataBase(); // Make it bool !!!
+        UpdateWindowName();
         ui->statusBar->showMessage("База данных успешно загружена.", 2000);
     }
 }
@@ -143,6 +180,7 @@ void MainWindow::on_save_as_triggered()
         db->SetPATH(fileName);
         db->SaveDataBase();
         WriteSettings();
+        UpdateWindowName();
         ui->statusBar->showMessage("База данных успешно сохранена.", 2000);
    }
 }
@@ -152,4 +190,39 @@ void MainWindow::on_action_triggered()
     FAQ faq(this);
     faq.setModal(true);
     faq.exec();
+}
+
+void MainWindow::on_new_2_triggered()
+{
+    QMessageBox::StandardButton quest =
+            QMessageBox::question(this, "Вопрос", "Сохранить эту базу данных?",
+                                  QMessageBox::Yes | QMessageBox::No);
+    if (quest == QMessageBox::Yes){
+        if (db->GetPATH().isEmpty()){
+            on_save_as_triggered();
+        }else {
+            db->SaveDataBase();                     // Save Old DataBase
+        }
+    }
+    db = std::make_shared<DataBase>();          // Create New DataBase
+    db->SetPATH("");                            // Set EmptyPath
+    WriteSettings();                            // Change PATH
+    UpdateWindowName();
+}
+
+void MainWindow::SetOrgName(const QString& name){
+    organisation_name = name;
+}
+
+QString MainWindow::GetOrgName(){
+    return organisation_name;
+}
+
+void MainWindow::on_save_triggered()
+{
+    if (db->GetPATH().isEmpty()){
+        on_save_as_triggered();
+    }else {
+        db->SaveDataBase();                     // Save Old DataBase
+    }
 }

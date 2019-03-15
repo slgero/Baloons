@@ -22,7 +22,7 @@ Order::Order(QWidget *parent, Data db) :
     ui(new Ui::Order),
     data(db), row(1), list_row(1), wid(nullptr),
     TextEditingFlag(true), TextEditingFlag2(true),
-    AdditionalExpenses(true)
+    AdditionalExpenses(true), discount(1)
 {
     ui->setupUi(this);
 
@@ -65,6 +65,7 @@ Order::Order(QWidget *parent, Data db) :
                            "заказа. И никак не влияет на выручку.");
     ui->hint_3->setToolTip("Данная цена добавляется в общую стоимость\n"
                            "заказа и в выручку.");
+    ui->spinBox->setToolTip("Скидка не распростроняется на доставку. Только на шары.");
 }
 
 Order::~Order()
@@ -84,12 +85,12 @@ void Order::ChangePrice(){  // Yeah, it is really cool, I can change the field i
     }
 
     // For TotalCost
-    int total_cost = 0;
-    double not_selling_price = 0;
+    double total_cost = 0, not_selling_price = 0;
     for (int i = 1; i < row; ++i){
         total_cost += PRICE;
         not_selling_price += PRICE1;
     }
+    total_cost *= discount;     // discount doesn't apply to shipping
     ui->TotalCost->setText(QString::number(total_cost + TAXII + ADDITIONAL_EXPENSES));
     ui->lineEdit->setText(QString::number(total_cost * 1.0 - not_selling_price + ADDITIONAL_EXPENSES));
 }
@@ -256,6 +257,14 @@ void Order::on_save_and_exit_clicked()
             return;
         }
    }
+   if (ui->lineEdit->text().toInt() < 0){
+       QMessageBox::StandardButton quest =
+               QMessageBox::question(this, "Вопрос", "Ваша выручка отрицательная. Продолжить?",
+                                     QMessageBox::Yes | QMessageBox::No);
+       if (quest == QMessageBox::No){
+           return;
+       }
+   }
    if (!CheckCountInTable())
        return;
    std::vector<QString> tmp;
@@ -307,5 +316,10 @@ void Order::on_checkBox_2_clicked()
 }
 
 
-
-
+void Order::on_spinBox_valueChanged(int arg1)
+{
+    qDebug() << "Before = " << discount;
+    qDebug() << "After disc =" << (static_cast<double>(arg1) / 100);
+    discount = 1 - (static_cast<double>(arg1) / 100);
+     qDebug() << discount;
+}

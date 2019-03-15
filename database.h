@@ -68,6 +68,7 @@ public:
 
     void SetPATH(const QString& path);
     const QString& GetPATH() const;
+    QString GetDataBaseName() const;
 
     void CreateEmptyPurchaseStorage();
     int GetCost(Items items) const;

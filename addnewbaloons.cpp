@@ -93,17 +93,16 @@ void AddNewBaloons::on_add_clicked()
         int price1 = ui->price1->text().toInt();
         int price2 = ui->price2->text().toInt();
         if (count == 0 || price1 == 0 || price2 == 0){
-            QMessageBox::warning(this, "Ошибка", "Ты неправильно заполнила поля, они не могут содержать буквы\n"
-                                                 "и не могут быть равными нулю");
+            QMessageBox::warning(this, "Ошибка", "Неправильно заполнены поля");
         } else {
             wig = new QTableWidgetItem(name);
             ui->tableWidget->setItem(row, 0, wig); // Add to table name of baloon
 
             // Thanks to RAII it nessesary do delete QTableWidgetItem
-            wig = new QTableWidgetItem(ui->count->text());
+            wig = new QTableWidgetItem(QString::number(ui->count->text().toInt() * ui->spinBox->value()));
             ui->tableWidget->setItem(row, 1, wig); // Add to table count
 
-            wig = new QTableWidgetItem(ui->price1->text());
+            wig = new QTableWidgetItem(ui->lineEdit_2->text());
             ui->tableWidget->setItem(row, 2, wig); // Add to table price1
 
             wig = new QTableWidgetItem(ui->price2->text());
@@ -114,16 +113,19 @@ void AddNewBaloons::on_add_clicked()
             if (!ui->checkBox->isChecked() && !ui->helium_price->text().isEmpty()){
                 CostPrice += ui->helium_price->text().toInt();
             }
-            to_data.insert(std::make_pair(name, std::vector<double>{ui->count->text().toDouble(),
+            to_data.insert(std::make_pair(name, std::vector<double>{
+                                              ui->count->text().toDouble() * ui->spinBox->value(),
                                                                  CostPrice,
                                                                  ui->price2->text().toDouble()}));
-            for_baloons.push_back(price1);
+            for_baloons.insert(std::make_pair(ui->name->text(), price1  * ui->spinBox->value()));
+
             // To clear fields after adding
             ui->price2->clear();
             ui->price1->clear();
             ui->name->clear();
             ui->count->clear();
             ui->helium_price->clear();
+            ui->spinBox->setValue(1);
 
             ui->checkBox->setChecked(false);
             CHECKBOX_SHOW
@@ -148,7 +150,8 @@ void AddNewBaloons::on_delete_2_clicked()
             to_data.erase(NameInRow);
         }
         to_delete.push_back(NameInRow);
-        to_delete_price.push_back(ui->tableWidget->item(ui->tableWidget->currentRow(), 2)->text().toInt());
+        to_delete_price.push_back(for_baloons.at(NameInRow));
+
         ui->tableWidget->removeRow(ui->tableWidget->currentRow());
         --row;
         save_flag = false;
@@ -158,7 +161,7 @@ void AddNewBaloons::on_delete_2_clicked()
 void AddNewBaloons::on_save_clicked()
 {
     for (const auto& x : for_baloons){
-        data->ChangeCost(x, Items::BALOONS);
+        data->ChangeCost(x.second, Items::BALOONS);
         qDebug() << "I add to baloons price =" << x;
     }
     data->AddNewBaloons(std::move(to_data));

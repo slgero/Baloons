@@ -50,6 +50,8 @@
         <file>icons/open.png</file>
         <file>icons/readme.png</file>
         <file>icons/baloons-111.ico</file>
+        <file>icons/save_as.png</file>
+        <file>icons/new.png</file>
     </qresource>
     <qresource prefix="/to_order">
         <file>icons/instagram.png</file>

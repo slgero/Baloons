@@ -181,6 +181,9 @@
    </layout>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -202,7 +205,9 @@
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="new_2"/>
     <addaction name="openAction"/>
+    <addaction name="save"/>
     <addaction name="save_as"/>
    </widget>
    <widget class="QMenu" name="menuF_A_Q">
@@ -237,6 +242,9 @@
    <property name="toolTip">
     <string>Сохранить базу данных</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
   </action>
   <action name="action">
    <property name="icon">
@@ -248,6 +256,39 @@
    </property>
    <property name="toolTip">
     <string>Самая ценная информация</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="new_2">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/prefix1/icons/new.png</normaloff>:/new/prefix1/icons/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Новый...</string>
+   </property>
+   <property name="toolTip">
+    <string>Создание новой БД</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="save">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/new/prefix1/icons/save_as.png</normaloff>:/new/prefix1/icons/save_as.png</iconset>
+   </property>
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+   <property name="toolTip">
+    <string>Сохранить БД</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

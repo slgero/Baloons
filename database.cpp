@@ -291,6 +291,13 @@ const QString& DataBase::GetPATH() const{
     return PATH;
 }
 
+QString DataBase::GetDataBaseName() const{
+    if (PATH.isEmpty()){
+        return "Новый проект";
+    }
+    return PATH.split("/").back();
+}
+
 void DataBase::CreateEmptyPurchaseStorage(){
     for (size_t i = 0; i < 7; ++i){
         db_storage_of_purchase.push_back(0);

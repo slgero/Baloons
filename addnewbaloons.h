@@ -38,9 +38,9 @@ private:
     int row;
     QTableWidgetItem* wig;
     My_map to_data;
-    std::vector<QString> to_delete;
-    std::vector<int> to_delete_price;
-    std::vector<int> for_baloons;
+    std::vector<QString> to_delete;     // Like a storage
+    std::vector<int> to_delete_price;   // Like a storage
+    std::map<QString, int> for_baloons; // To Add to Baloons cost
 };
 
 #endif // ADDNEWBALOONS_H

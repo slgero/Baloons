@@ -43,6 +43,8 @@ private slots:
 
     void on_price_textEdited(const QString &arg1);
 
+    void on_spinBox_valueChanged(int arg1);
+
 private:
     Ui::Order *ui;
     Data data;
@@ -55,6 +57,7 @@ private:
     bool AdditionalExpenses;
     QShortcut *keyEsc;
     QShortcut *keySpace;
+    double discount;
 };
 
 #endif // ORDER_H
