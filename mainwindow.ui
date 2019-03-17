@@ -190,6 +190,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="new_2"/>
+   <addaction name="save"/>
+   <addaction name="openAction"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -230,6 +233,9 @@
    <property name="toolTip">
     <string>Открыть базу данных</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="save_as">
    <property name="icon">
@@ -258,7 +264,7 @@
     <string>Самая ценная информация</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+H</string>
+    <string>F1</string>
    </property>
   </action>
   <action name="new_2">
@@ -289,6 +295,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_lol">
+   <property name="text">
+    <string>&amp;lol</string>
    </property>
   </action>
  </widget>
