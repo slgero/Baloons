@@ -1,0 +1,9 @@
+# Qt
+*.moc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# Other
+.ipynb_checkpoints/ 
+
