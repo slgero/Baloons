@@ -5,6 +5,7 @@
 **A Qt-based, free and open source CRM system, designed for a small business that organizes events with balloons.**
 
 ![enter image description here](https://i.ibb.co/0sDvP59/main.png)
+
 It's allows you to easily maintain the necessary accounting report, inventory of products in stock, as well as the amount of helium consumed. You can also conduct statistics on your orders using convenient dashboards. Moreover, with the help of this application you can calculate the cost of one ball taking into account helium, tape, confiti, etc.
 
 ## Features
