@@ -1,5 +1,3 @@
-![a](https://i.ibb.co/ZVHTRD6/balloon-clipart-confetti-16.png)
-
 # Baloons
 **This project is no longer being maintained**
 
